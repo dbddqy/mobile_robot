@@ -1,0 +1,11 @@
+SanDisk 64G: Ubiquity Robotics image with ros installed
+	wifi password: robotseverywhere
+	ssh ubuntu@10.42.0.1 password: ubuntu
+	vncserver password: 5*
+
+SanDisk 32G: Raspbien as wireless webcam
+	wifi HUAWEI_45XSNB
+	ssh pi@192.168.3.22 password: 1234567
+	vncserver password: 1234567
+	
+
