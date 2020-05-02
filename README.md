@@ -6,10 +6,10 @@ Developing mobile robotic platform.
 ---
 Mecanum wheels locomotion strategy. Using DJI Robomaster hardware.
 
-- [ ] mechanical design
-- [ ] motor control: communication via CAN bus
-- [ ] motion control: speed calculation
-- [ ] motion control: closed-loop velocity control
+- [x] mechanical design
+- [x] motor control: communication via CAN bus
+- [x] motion control: speed calculation
+- [x] motion control: closed-loop velocity control
 - [ ] provide IMU data for high level control
 - [ ] provide wheel odometry for high level control
 
@@ -17,6 +17,7 @@ Mecanum wheels locomotion strategy. Using DJI Robomaster hardware.
 ---
 Developing laser-based SLAM in ROS.
 
+- [ ] config ROS on Jetson Nano, communicate with MCU
 - [ ] robot modelling in URDF
 - [ ] acquire data from Lidar
 - [ ] robot physical modelling for simulation
