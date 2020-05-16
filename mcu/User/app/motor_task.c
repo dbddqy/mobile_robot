@@ -7,20 +7,20 @@
 
 #include <stdio.h>
 
-
 pid_t pid_wheel_spd[4]  = { 0 };
 pid_t pid_wheel_position[4]  = { 0 };
+
 extern moto_measure_t motor_chassis[4];
+extern float chassis_speed[3];
+extern int iterationsToContinue;
 
 char data[106];
-uint16_t m_current[4] = { 0, 0, 0, 0 };
+int16_t m_current[4] = { 0, 0, 0, 0 };
 float m_speed[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 float m_position[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 void motor_task(const void* argu)
 {
-	rm_uart_init();
-	rm_can_init();
 	
 	for (int i=0; i < 4; i++) {
 		pid_init(&pid_wheel_spd[i], 7000, 1000, 3.0f, 0.005f, 0.00f);
@@ -32,26 +32,29 @@ void motor_task(const void* argu)
 	while(1)
 	{
 		ticks = osKernelSysTick();
+		if (iterationsToContinue-- > 0)
+			chassis_apply_speed(); // speed from uart communication
+		else
+			chassis_halt();
 		// reportMotorState();
-		if ( buttonPressed() ) {
-			osDelay(3000);
-			flag += 1;
-			count += (2500); // ms
-		} 
-		if (count > 0) {
-			if ( flag % 3 == 0 )
-				chassis_set_speed(0.0f, 0.0f, 0.31416f * 2);
-			else if ( flag % 3 == 1 )
-				chassis_set_speed(200.0f, 0.0f, 0.0f);
-			else
-				chassis_set_speed(0.0f, 200.0f, 0.0f);
-			count --;
-		} else {
-			chassis_set_speed(0.0f, 0.0f, 0.0f);
-		}
-		motor_set_speed(pid_wheel_spd);
+//		if ( buttonPressed() ) {
+//			osDelay(3000);
+//			flag += 1;
+//			count += (2500); // ms
+//		} 
+//		if (count > 0) {
+//			if ( flag % 3 == 0 )
+//				chassis_set_speed(0.0f, 0.0f, 0.31416f * 2);
+//			else if ( flag % 3 == 1 )
+//				chassis_set_speed(200.0f, 0.0f, 0.0f);
+//			else
+//				chassis_set_speed(0.0f, 200.0f, 0.0f);
+//			count --;
+//		} else {
+//			chassis_set_speed(0.0f, 0.0f, 0.0f);
+//		}
+		motor_set_speed(pid_wheel_spd); // apply the current to all the motors
 		osDelayUntil(&ticks, 1);
-		// osDelay(10);
 	}
 }
 
@@ -92,3 +95,17 @@ void chassis_set_speed(float vx, float vy, float w)
 	m_speed[3] = -(vy + vx + w * 0.5f * (CHASSIS_LENGTH + CHASSIS_WIDTH)) * CHASSIS_REDUCTION * 30.0f / M_PI / CHASSIS_WHEEL_RADIUS;
 }
 
+void chassis_apply_speed(void)
+{
+	if (chassis_speed[0] > -CHASSIS_VEL_LIMIT_X && chassis_speed[0] < CHASSIS_VEL_LIMIT_X
+		&& chassis_speed[1] > -CHASSIS_VEL_LIMIT_Y && chassis_speed[1] < CHASSIS_VEL_LIMIT_Y
+		&& chassis_speed[2] > -CHASSIS_VEL_LIMIT_W && chassis_speed[2] < CHASSIS_VEL_LIMIT_W)
+		chassis_set_speed(chassis_speed[0], chassis_speed[1], chassis_speed[2]);
+	else
+		chassis_set_speed(0.0f, 0.0f, 0.0f);
+}
+
+void chassis_halt(void)
+{
+	chassis_set_speed(0.0f, 0.0f, 0.0f);
+}

@@ -55,10 +55,10 @@ void init_setup(void)
   write_led_io(LED_IO8, LED_OFF);
 	
   //初始化串口
-	
+	rm_uart_init();
   
   //初始化 CAN 设备
-  
+  rm_can_init();
 	
 	//打开四路电源
 	rm_power_init();

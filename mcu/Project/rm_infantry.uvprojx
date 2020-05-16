@@ -413,19 +413,9 @@
               <FilePath>..\User\algorithm\pid.c</FilePath>
             </File>
             <File>
-              <FileName>ramp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\algorithm\ramp.c</FilePath>
-            </File>
-            <File>
               <FileName>utility.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\algorithm\utility.c</FilePath>
-            </File>
-            <File>
-              <FileName>utility.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User\algorithm\utility.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -448,9 +438,14 @@
               <FilePath>..\User\app\motor_task.c</FilePath>
             </File>
             <File>
-              <FileName>motor_task.h</FileName>
+              <FileName>communication_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\app\communication_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>communication_task.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\User\app\motor_task.h</FilePath>
+              <FilePath>..\User\app\communication_task.h</FilePath>
             </File>
           </Files>
         </Group>

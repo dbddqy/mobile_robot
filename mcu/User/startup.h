@@ -31,20 +31,17 @@
 #define __START_UP_H__
 
 #include "rm_hal_lib.h"
-//#include "chassis_task.h"
-//#include "detect_task.h"
-//#include "gimbal_task.h"
-//#include "execute_task.h"
 #include "cmsis_os.h"
 #include "study_task.h"
 #include "motor_task.h"
+#include "communication_task.h"
 
 /**
   * @brief     最多支持 5 个任务函数的配置和开启
   * @usage     首先开启 USER_TASKx 的宏定义，然后在 USER_TASKx 后添加需要开启的任务函数名
   */
 #define USER_TASK1 motor_task
-//#define USER_TASK2 motor_task
+#define USER_TASK2 communication_task
 //#define USER_TASK3 detect_task
 //#define USER_TASK4 execute_task
 //#define USER_TASK5

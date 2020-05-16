@@ -102,7 +102,7 @@ static void encoder_data_handle(moto_measure_t *ptr, uint8_t data[])
   ptr->filter_rate = (int32_t)(temp_sum/FILTER_BUF);
 }
 
-void motor_set_current(uint16_t *speeds){
+void motor_set_current(int16_t *speeds){
 	uint8_t can_send_data[8];
 	can_send_data[0] = speeds[0]>>8;
 	can_send_data[1] = speeds[0];

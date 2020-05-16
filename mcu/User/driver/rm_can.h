@@ -44,6 +44,6 @@ void can_receive_callback(uint32_t recv_id, uint8_t data[]);
 static void get_moto_offset(moto_measure_t *ptr, uint8_t data[]);
 static void encoder_data_handle(moto_measure_t *ptr, uint8_t data[]);
 
-void motor_set_current(uint16_t *speeds);
+void motor_set_current(int16_t *speeds);
 
 #endif

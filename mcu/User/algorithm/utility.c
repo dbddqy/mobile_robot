@@ -38,3 +38,8 @@ char* itoa(int num, char *str, int radix)
  
     return str;//返回转换后的字符串
 }
+
+float ByteToFloat(uint8_t* byteArray)  
+{  
+    return *((float*)byteArray);  
+}  
