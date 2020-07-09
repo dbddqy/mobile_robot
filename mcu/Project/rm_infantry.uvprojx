@@ -442,11 +442,6 @@
               <FileType>1</FileType>
               <FilePath>..\User\app\communication_task.c</FilePath>
             </File>
-            <File>
-              <FileName>communication_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User\app\communication_task.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

@@ -4,6 +4,7 @@
 #include "rm_can.h"
 #include "rm_gpio.h"
 #include "rm_uart.h"
+#include "motor_task.h"
 
 #include <stdio.h>
 
@@ -31,7 +32,7 @@
  */
 
 
-uint8_t motorPositionBytes[16];
+uint8_t motorSpeedBytes[8];
 
 extern moto_measure_t motor_chassis[4];
 
@@ -42,31 +43,23 @@ void communication_task(const void* argu)
 		ticks = osKernelSysTick();
 		reportMotorPosition();
 		// LOGINFO("hello hello asd\n", 16);
-		osDelayUntil(&ticks, 40);
+		osDelayUntil(&ticks, 2);
 	}
 }
 
 static void reportMotorPosition(void)
 {
-	motorPositionBytes[0] = (uint8_t) (motor_chassis[0].total_angle >> 24);
-	motorPositionBytes[1] = (uint8_t) (motor_chassis[0].total_angle >> 16);
-	motorPositionBytes[2] = (uint8_t) (motor_chassis[0].total_angle >> 8);
-	motorPositionBytes[3] = (uint8_t) (motor_chassis[0].total_angle);
+	motorSpeedBytes[0] = (uint8_t) (motor_chassis[0].speed_rpm >> 8);
+	motorSpeedBytes[1] = (uint8_t) (motor_chassis[0].speed_rpm);
 	
-	motorPositionBytes[4] = (uint8_t) (motor_chassis[1].total_angle >> 24);
-	motorPositionBytes[5] = (uint8_t) (motor_chassis[1].total_angle >> 16);
-	motorPositionBytes[6] = (uint8_t) (motor_chassis[1].total_angle >> 8);
-	motorPositionBytes[7] = (uint8_t) (motor_chassis[1].total_angle);
+	motorSpeedBytes[2] = (uint8_t) (motor_chassis[1].speed_rpm >> 8);
+	motorSpeedBytes[3] = (uint8_t) (motor_chassis[1].speed_rpm);
 	
-	motorPositionBytes[8] = (uint8_t) (motor_chassis[2].total_angle >> 24);
-	motorPositionBytes[9] = (uint8_t) (motor_chassis[2].total_angle >> 16);
-	motorPositionBytes[10] = (uint8_t) (motor_chassis[2].total_angle >> 8);
-	motorPositionBytes[11] = (uint8_t) (motor_chassis[2].total_angle);
+	motorSpeedBytes[4] = (uint8_t) (motor_chassis[2].speed_rpm >> 8);
+	motorSpeedBytes[5] = (uint8_t) (motor_chassis[2].speed_rpm);
 	
-	motorPositionBytes[12] = (uint8_t) (motor_chassis[3].total_angle >> 24);
-	motorPositionBytes[13] = (uint8_t) (motor_chassis[3].total_angle >> 16);
-	motorPositionBytes[14] = (uint8_t) (motor_chassis[3].total_angle >> 8);
-	motorPositionBytes[15] = (uint8_t) (motor_chassis[3].total_angle);
+	motorSpeedBytes[6] = (uint8_t) (motor_chassis[3].speed_rpm >> 8);
+	motorSpeedBytes[7] = (uint8_t) (motor_chassis[3].speed_rpm);
 	
-	write_uart(USER_UART3, motorPositionBytes, 16);
+	write_uart(USER_UART3, motorSpeedBytes, 8);
 }

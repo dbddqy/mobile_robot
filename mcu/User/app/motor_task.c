@@ -88,6 +88,7 @@ void reportMotorState(void)
 /* vx and vy in (mm/s), w in rad/s */
 void chassis_set_speed(float vx, float vy, float w)
 {
+	// inverse kinematics of the chasis
 	// speed in rpm
 	m_speed[0] = -(vy - vx + w * 0.5f * (CHASSIS_LENGTH + CHASSIS_WIDTH)) * CHASSIS_REDUCTION * 30.0f / M_PI / CHASSIS_WHEEL_RADIUS;
 	m_speed[1] = +(vy + vx - w * 0.5f * (CHASSIS_LENGTH + CHASSIS_WIDTH)) * CHASSIS_REDUCTION * 30.0f / M_PI / CHASSIS_WHEEL_RADIUS;
