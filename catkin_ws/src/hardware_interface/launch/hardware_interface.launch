@@ -1,0 +1,3 @@
+<launch>
+    <node name="hardware_interface" pkg="hardware_interface" type="hardware_interface.py" />
+</launch>

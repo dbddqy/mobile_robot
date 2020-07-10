@@ -2,25 +2,30 @@
 
 Developing mobile robotic platform.
 
-# result of first stage development  
+# Result of first stage development  
 ![](pics/01.gif)
 
+## Issues
+
+PID not fine tuned. Can only reach (required_speed - 20 mm/s)
+
+
 ## Low level control
----
+
 Mecanum wheels locomotion strategy. Using DJI Robomaster hardware.
 
 - [x] mechanical design
 - [x] motor control: communication via CAN bus
 - [x] motion control: speed calculation
 - [x] motion control: closed-loop velocity control
-- [x] provide IMU data for high level control
+- [ ] provide IMU data for high level control
 - [x] provide wheel odometry for high level control
 
 ## high level control
----
+
 Developing laser-based SLAM in ROS.
 
-- [ ] config ROS on Jetson Nano, communicate with MCU
+- [ ] config ROS on Pi, communicate with MCU
 - [x] robot modelling in URDF
 - [x] acquire data from Lidar
 - [x] robot physical modelling for simulation

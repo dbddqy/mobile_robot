@@ -9,4 +9,7 @@ SanDisk 32G: Raspbien as wireless webcam
 	ssh pi@192.168.3.22 password: 1234567
 	vncserver password: 1234567
 	
-
+Samsung 32G: Ubiquity Robotics image(for sechs)
+	wifi password: robotseverywhere
+        ssh ubuntu@192.168.179.113 password: ubuntu (Popenweile)
+	vncserver password: 123456

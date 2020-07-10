@@ -1,3 +1,4 @@
 <launch>
     <node name="commander_joy" pkg="commander_joy" type="commander_joy.py" />
+    <node name="hardware_interface" pkg="hardware_interface" type="hardware_interface.py" />
 </launch>

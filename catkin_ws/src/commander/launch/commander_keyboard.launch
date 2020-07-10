@@ -1,0 +1,4 @@
+<launch>
+    <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" />
+    <node name="commander_keyboard" pkg="commander" type="commander_keyboard.py" />
+</launch>
