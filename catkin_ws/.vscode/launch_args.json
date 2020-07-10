@@ -1,0 +1,8 @@
+{
+	"remoteArgs": {
+		"host": "192.168.179.113",
+		"user": "ubuntu",
+		"keyfile": "/home/yue/.ssh/id_rsa",
+		"cwd": "/home/ubuntu/repo/mobile_robot/catkin_ws"
+	}
+}

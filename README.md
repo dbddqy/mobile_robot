@@ -3,7 +3,11 @@
 Developing mobile robotic platform.
 
 # Result of first stage development  
-![](pics/01.gif)
+### test chassis  
+![](pics/test_chassis.gif)
+### test odometry  
+![](pics/test_odom.gif)
+![](pics/test_odom_video.gif)
 
 ## Issues
 

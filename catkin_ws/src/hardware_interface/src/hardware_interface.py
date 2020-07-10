@@ -2,6 +2,7 @@
 
 # ===============================================================================
 # this node listen to /vel_command and send velocity commands to the robot
+#           listen to the robot feedback and pub to /vel_feedback
 # ===============================================================================
 
 import serial
@@ -55,10 +56,14 @@ def limit_speed(speed):
 
 def constructVelocity(w1, w2, w3, w4):
     factor = pi * CHASSIS_WHEEL_DIAMETER / CHASSIS_REDUCTION / 60.0 
-    vx = factor * (w2 - w3) * 0.5
-    vy = factor * (w2 - w1) * 0.5
-    w = factor * (-w2 - w4) / (CHASSIS_LENGTH + CHASSIS_WIDTH)
-    return vx, vy, w
+    vx = factor * (w2 - w3 + w1 - w4) * 0.25 # mm/s
+    vy = factor * (w2 - w1 + w3 - w4) * 0.25 # mm/s
+    w = factor * (-w2 - w4 - w1 - w3) * 0.5 / (CHASSIS_LENGTH + CHASSIS_WIDTH) # rad/s
+    msg = Twist()
+    msg.linear.x = vx * 0.001
+    msg.linear.y = vy * 0.001
+    msg.angular.z = w
+    return msg
 
 
 def callback_Twist(twist):
@@ -72,6 +77,7 @@ def callback_Twist(twist):
 rospy.init_node("hardware_interface", anonymous=False)
 ser = serial_init()
 
+pub = rospy.Publisher('vel_feedback', Twist , queue_size=10)
 rospy.Subscriber("vel_command", Twist, callback_Twist)
 
 rate = rospy.Rate(25) # 25Hz
@@ -95,6 +101,7 @@ while not rospy.is_shutdown():
     recv_bytes = ser.read(8)
     recv_bytes_ordered = recv_bytes[::-1]
     w4, w3, w2, w1 = unpack("hhhh", recv_bytes_ordered)
-    vx, vy, w = constructVelocity(w1, w2, w3, w4)
-    rospy.loginfo("vx: %f  vy: %f  w: %f", vx, vy, w)
+    msg = constructVelocity(w1, w2, w3, w4)
+    pub.publish(msg)
+    # rospy.loginfo("vx: %f  vy: %f  w: %f", vx, vy, w)
     rate.sleep()
