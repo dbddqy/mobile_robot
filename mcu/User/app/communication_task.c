@@ -41,9 +41,10 @@ void communication_task(const void* argu)
 	uint32_t ticks;
 	while(1) {
 		ticks = osKernelSysTick();
+		
 		reportMotorPosition();
 		// LOGINFO("hello hello asd\n", 16);
-		osDelayUntil(&ticks, 2);
+		osDelayUntil(&ticks, 5);
 	}
 }
 
