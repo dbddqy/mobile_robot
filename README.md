@@ -3,15 +3,16 @@
 Developing mobile robotic platform.
 
 # Result of first stage development  
-### test chassis  
+### Test chassis  
 ![](pics/test_chassis.gif)
-### test odometry  
+### Test odometry  
 ![](pics/test_odom.gif)
 ![](pics/test_odom_video.gif)
 
 ## Issues
 
-PID not fine tuned. Can only reach (required_speed - 20 mm/s)
+- [x] SOLVED  
+- [x] PID not fine tuned. Can only reach (required_speed - 20 mm/s)
 
 
 ## Low level control

@@ -23,7 +23,7 @@ void motor_task(const void* argu)
 {
 	
 	for (int i=0; i < 4; i++) {
-		pid_init(&pid_wheel_spd[i], 7000, 1000, 3.0f, 0.005f, 0.00f);
+		pid_init(&pid_wheel_spd[i], 7000, 1000, 11.5f, 0.005f, 0.00f);
 		pid_init(&pid_wheel_position[i], 3000, 500, 3.0f, 0.00f, 0.00f);
 	}		
 	uint32_t ticks;
