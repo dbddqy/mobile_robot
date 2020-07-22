@@ -16,6 +16,7 @@ Developing mobile robotic platform.
 
 ## Issues
 
+- [x] SOLVED  
 - [x] PID not fine tuned. Can only reach (required_speed - 20 mm/s)
 
 
