@@ -1,0 +1,11 @@
+<launch>
+    <node name="hardware_interface" pkg="hardware_interface" type="hardware_interface.py" />
+    <node name="odom" pkg="odometry_pub" type="odometry_pub" />
+
+    <include file="$(find slam)/launch/include/rplidar.launch.xml"/>
+    <include file="$(find slam)/launch/include/robot_gmapping.launch.xml"/>
+
+    <!-- Move base -->
+    <!--<include file="$(find navigation_sim_demo)/launch/include/move_base.launch.xml"/>-->
+ 
+</launch>
