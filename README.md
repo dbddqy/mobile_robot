@@ -2,6 +2,8 @@
 
 Developing mobile robotic platform.
 
+![](pics/move_x.jpg)
+
 # Testing Results
 
 ### gmapping  
